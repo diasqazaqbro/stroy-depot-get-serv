@@ -5,6 +5,12 @@ export default async function handle(req, res) {
   const { method } = req;
 
   if (method === "GET") {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader(
+      "Access-Control-Allow-Methods",
+      "GET, PUT, POST, DELETE, OPTIONS"
+    );
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     const newsCollection = collection(db, "settings");
     const querySnapshot = await getDocs(newsCollection);
     const newsDocs = querySnapshot.docs.map((doc) => ({
